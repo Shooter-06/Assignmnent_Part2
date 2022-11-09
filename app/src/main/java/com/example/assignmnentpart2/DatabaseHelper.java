@@ -25,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(" create table product (id integer primary key autoincrement, name varchar, age varchar,phone number)");
+        db.execSQL(" create table store (id integer primary key autoincrement, name varchar, age varchar,phone number)");
 
     }
 
@@ -47,27 +47,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
-//    public boolean updateItems (String id,String name, String age, String phone ) {
-//        SQLiteDatabase db = getWritableDatabase();
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put("id", id);
-//        contentValues.put("name", name);
-//        contentValues.put("age", age);
-//        contentValues.put("phone", phone);
-//        db.update(TABLE_NAME, contentValues, " ID = ? ", new String[] {id});
-//        return true;
-//    }
+    public boolean updateItems (String id,String name, String age, String phone ) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("id", id);
+        contentValues.put("name", name);
+        contentValues.put("age", age);
+        contentValues.put("phone", phone);
+        db.update(TABLE_NAME, contentValues, " ID = ? ", new String[] {id});
+        return true;
+    }
 
     //it returns the rows to be deleted which is an integer value
-    public Integer deleteProduct (String id)  {
+    public Integer deleteItems (String id)  {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, " ID = ? ", new String[] {id});
     }
 
-    public Cursor viewAllProduct() {
+    public Cursor viewAllItems() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery(" select * from " + TABLE_NAME, null);
         return  res;
     }
 }
-
